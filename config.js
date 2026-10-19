@@ -1,0 +1,1 @@
+window.CLAIMS_CONFIG={endpoint:'https://script.google.com/macros/s/AKfycbyfSxqVrIZoTFBTn64qvlwoE3zaGyzqFN04CweqjCjb4kjO7o82N7dZErrfoBMiM18W/exec',adminUrl:'https://script.google.com/macros/s/AKfycbyfSxqVrIZoTFBTn64qvlwoE3zaGyzqFN04CweqjCjb4kjO7o82N7dZErrfoBMiM18W/exec'};
