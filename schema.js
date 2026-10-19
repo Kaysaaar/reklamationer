@@ -2,6 +2,8 @@
 window.ClaimsSchema = {
   sellers: ['Alexander','Claus','Daniel','Emil','Jørn','Kalle','Kim','Lasse'],
   customer: [
+    ['inspectionPlace','Gennemgang','select',['Hos kunden','På lageret']],
+    ['returnOrder','Returordrenummer i BC (hvis oprettet)','text'],
     ['reference','Kundens reference / eksisterende sagsnummer','text'],
     ['customer','Kunde / forhandler','text',true],['contact','Kontaktperson','text',true],
     ['phone','Telefon','tel'],['email','E-mail','email'],['address','Adresse for besigtigelsen','text',true],
@@ -51,5 +53,5 @@ window.ClaimsSchema = {
       ['investigation','Hvad er undersøgt?','textarea']],checks:['Oversigtsbillede taget','Nærbillede taget','Yderligere oplysninger nødvendige']}
   },
   closing:[['description','Kundens beskrivelse','textarea',true],['assessment','Sælgerens observationer','textarea'],['proposal','Forslag til næste skridt','textarea']],
-  statuses:['Ny','Under behandling','Afventer oplysninger','Afsluttet']
+  statuses:['Åben','Afventer','Afsluttet']
 };
