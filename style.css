@@ -68,4 +68,4 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 @media(max-width:480px){.case-overview .case-row{grid-template-columns:1fr 1fr;padding:14px}.case-row .case-customer{grid-column:1/-1}.case-row .pill{grid-column:auto}.case-row .case-number,.case-row .case-date,.case-row .case-seller{font-size:.9rem}.office-filters{gap:10px}.office-filters label{font-size:.85rem}.office-search{width:100%}}
 .settings-button{display:grid;place-items:center;padding:10px;min-width:44px;min-height:44px;background:transparent;border:0;margin-left:auto}.settings-button svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.5}.settings-dialog{max-width:420px}.settings-dialog h2{margin:0}.settings-dialog input{letter-spacing:6px;font-size:22px}.settings-dialog label{margin-top:14px}.settings-dialog form>button{width:100%;margin-top:20px}.settings-dialog p{font-size:.92rem}
 
-.settings-dialog .lock-app{width:100%;margin-top:18px;background:transparent}.account-actions .settings-button{min-height:44px;min-width:44px}
+.account-actions .settings-button{min-height:44px;min-width:44px}
