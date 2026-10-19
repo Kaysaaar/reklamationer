@@ -3,3 +3,5 @@
 .auth-locked body>header,.auth-locked body>main,.auth-locked body>aside{display:none!important}.auth-panel{max-width:440px;margin:12vh auto;padding:24px}.auth-panel input{font-size:26px;letter-spacing:12px;text-align:center}.auth-panel button{width:100%;margin-top:20px}
 
 .account-actions{display:flex;align-items:center;gap:14px}.account-actions button{padding:6px 12px;font-size:13px;min-height:40px}.account-actions a{color:var(--ink);font-size:13px}header{flex-wrap:wrap}
+
+.open-cases{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}.open-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.open-heading h2{margin:0}.open-cases .case-list{display:flex}.open-cases .case-list button{width:100%}
