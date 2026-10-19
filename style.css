@@ -75,3 +75,5 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 @media(max-width:600px){.office-filters .date-filter{grid-column:1/-1}}
 
 .workflow-editor{display:grid;gap:14px}.workflow-editor [hidden]{display:none}.workflow-editor input,.workflow-editor select,.workflow-editor textarea{min-width:0;width:100%}.open-heading{flex-wrap:wrap}.open-heading h2{margin-right:auto}.open-cases>.case-list button{overflow-wrap:anywhere}
+
+.auth-panel input[type="text"]{font-size:16px;letter-spacing:normal;text-align:left;width:100%;min-width:0;box-sizing:border-box}.auth-panel details{margin-top:20px}.auth-panel summary{cursor:pointer}.auth-panel p{overflow-wrap:anywhere}
