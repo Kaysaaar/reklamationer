@@ -1,7 +1,7 @@
 'use strict';
 (async()=>{
 const identity=await ClaimAuth.ready;
-if(identity&&identity.role!=="seller"){location.replace("office.html");return;}
+if(identity&&identity.role!=="seller"){document.querySelector("main").textContent="Denne adgang er til kontorappen.";return;}
 const S=ClaimsSchema,$=claimById,el=claimEl;let record=null,step=0,dirty=0,writeQueue=Promise.resolve(),saveTimer,selecting=false,chosen=new Set(),drawerOpen=false,viewerIndex=0,processing=false,saving=false,savedRecord=null,workflowEditor=null,showClosed=false,sellerOffset=0,sellerTotal=0,savedDirty=false;
 window.ClaimPrepareUpdate=async()=>{if(savedDirty)throw Error('Gem opfølgningen først.');if(saving||processing)throw Error('Vent til billederne og sagen er gemt, og prøv igen.');await persist();};
 const allDefinitions=[...S.customer,...S.product,...S.closing,...Object.values(S.types).flatMap(t=>t.fields)];
