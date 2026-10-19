@@ -5,3 +5,58 @@
 .account-actions{display:flex;align-items:center;gap:14px}.account-actions button{padding:6px 12px;font-size:13px;min-height:40px}.account-actions a{color:var(--ink);font-size:13px}header{flex-wrap:wrap}
 
 .open-cases{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}.open-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.open-heading h2{margin:0}.open-cases .case-list{display:flex}.open-cases .case-list button{width:100%}
+
+/* Fluid layouts share the same controls across phones, tablets and desktops. */
+body{min-height:100vh;min-height:100dvh}
+header{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#sellerApp{max-width:1100px;padding-inline:clamp(16px,3vw,32px)}
+.field,.fields>*,.office-data>*,.office-followup>*,.steps button,.actions>*{min-width:0}
+input,select,textarea{max-width:100%}
+.case-line{flex-wrap:wrap}.case-line span,.case-list button,.office-case-head h2{overflow-wrap:anywhere}
+.actions,.photo-controls,.office-search{flex-wrap:wrap}
+.actions>*{flex:1 1 120px}.office-search{flex:1 1 430px;max-width:850px}
+.office-search input{flex:1 1 220px;width:auto}.office-search button{flex:0 0 auto}
+.office-main{width:100%;padding:clamp(16px,2vw,36px) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.office-layout{grid-template-columns:clamp(230px,21vw,320px) minmax(0,1fr)}
+.office-data{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.office-gallery{grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}
+.office-followup{grid-template-columns:minmax(180px,240px) minmax(0,1fr)}
+.office-followup button{justify-self:start}
+.camera-drawer{max-height:82vh;max-height:82dvh;padding-left:max(16px,env(safe-area-inset-left,0px),calc((100vw - 720px)/2));padding-right:max(16px,env(safe-area-inset-right,0px),calc((100vw - 720px)/2))}
+.camera-handle{position:sticky;top:0;z-index:2;background:var(--paper)}
+.photo-controls{gap:8px}.photo-controls button{min-height:44px}.photo-check{min-width:44px;min-height:44px;align-items:center;justify-content:center}
+dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:auto}
+.open-heading{flex-wrap:wrap}.open-heading button,.text-button,.account-actions button{min-height:44px}
+@media(min-width:760px){
+  #sellerApp .home{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(30px,5vw,70px);align-content:start}
+  #sellerApp .home>*{grid-column:1}
+  #sellerApp .home .open-cases{grid-column:2;grid-row:1/span 8;margin:0;padding:0 0 0 clamp(24px,3vw,40px);border-top:0;border-left:1px solid var(--line)}
+  #sellerApp .home>button{align-self:start}
+  #sellerApp .home h1{font-size:clamp(32px,4vw,46px)}
+  #customerFields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #review{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+  #review>.summary-card{margin:0}
+}
+@media(max-width:1000px){
+  .office-layout{grid-template-columns:minmax(0,1fr)}
+  .office-layout>.case-list,.case-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+  .office-layout>aside .case-list{display:grid;max-height:300px;overflow:auto;padding:3px}
+}
+@media(max-width:600px){
+  .office-search{flex-basis:100%;gap:8px}.office-search input{flex-basis:100%}.office-search button{flex:1 1 100px}
+  .office-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .office-followup{grid-template-columns:minmax(0,1fr)}
+  .office-followup button{justify-self:stretch}
+  .office-toolbar h1{font-size:28px}.office-detail{padding:14px}
+  .account-actions{margin-left:auto}.steps{gap:0}.steps button{padding:10px 3px;font-size:12px}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .home{padding-top:20px}.camera-drawer{max-height:90dvh}
+  .photo-strip .open-photo,.photo-strip .placeholder{height:110px}
+  #viewerImage{max-height:48dvh}
+}
+@media print{#sellerApp .home,.office-layout,.office-data{display:block}.office-main{width:100%;padding:0}.office-layout>aside{display:none}}
+/* Action labels stay centered, including buttons with a trailing icon. */
+.home>button,.actions>button,.office-search>button,.gallery-toolbar>button,.photo-controls>button{text-align:center;justify-content:center}
+.home>.primary{display:block;position:relative;padding-inline:48px}
+.home>.primary>span{position:absolute;right:17px;top:50%;transform:translateY(-50%)}
