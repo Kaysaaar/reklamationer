@@ -89,3 +89,5 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .case-card.case-open{background:#f0f6ee}.case-card.case-closed{background:#f0f1f0}
 .case-card .case-title{display:flex;align-items:baseline;gap:8px}.case-card .case-status-dot{display:inline-block;flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:#36763d}.case-closed .case-status-dot{background:#222}
 .case-opening{border:1px solid #cbd7cb;border-radius:18px;padding:24px 32px;color:#173f32;background:#f7f8f3;text-align:center;max-width:calc(100vw - 40px)}.case-opening::backdrop{background:rgba(16,35,27,.25)}.case-opening p{margin:10px 0 0;font-weight:600}.opening-spinner{display:inline-block;width:24px;height:24px;border:3px solid #d1dfd2;border-top-color:#214d3c;border-radius:50%;animation:case-spin .8s linear infinite}@keyframes case-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.opening-spinner{animation:none}}
+
+.seller-search{margin:0 0 14px;min-width:0}.seller-search-input{display:flex;gap:8px}.seller-search-input input{flex:1;min-width:0}.seller-search-input button{flex:none}.seller-search .text-button{margin-top:4px}
