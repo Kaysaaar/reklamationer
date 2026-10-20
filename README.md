@@ -32,3 +32,6 @@ Shared timeline loads on expansion in pages of20 and combines case creation, reg
 
 ## 1.5.0
 Visit tools on saved cases: own-note dictation uses the device keyboard (Danish dictation must be enabled); no app audio capture, audio upload or paid transcription API. Text requires explicit approval before timeline save. Editable visit report is assembled from factual case fields, excluding office notes/history, with an agreement placeholder that must be reviewed; saved as a private TXT attachment, never automatically sent. Canvas arrows and optional captions create JPEG attachment copies (max2200px, quality0.9), retaining originals. Existing attachment authorization/size limits/revision checks apply. Generated File objects are retained for retry idempotency; errors keep dialog contents.
+
+## 1.5.1
+Besøgsreferater gemmes som PDF med Wallmann-logo, godkendt tekst, sidenumre og op til 10 valgte billeder. Gemte billedmarkeringer kan vælges som bilag. PDF'en gemmes privat på sagen via den eksisterende filoverførsel og kan vises eller downloades. Ingen automatisk afsendelse. Interne kontornoter medtages ikke. PDF-værktøjet (pdf-lib 1.17.1, MIT) hentes først ved brug; PDF-billeder skaleres til højst 1800 pixels og originalerne bevares. Grænsen på 4 MiB pr. bilag gælder også referater.
