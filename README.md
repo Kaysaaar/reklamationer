@@ -38,3 +38,6 @@ Besøgsreferater gemmes som PDF med Wallmann-logo, godkendt tekst, sidenumre og 
 
 ## 1.5.2
 Besøgsreferatets PDF vises inden godkendelse, med sideknapper og mulighed for at rette tekst/billedvalg. Kun den viste fil gemmes ved godkendelse. Forhåndsvisning gemmer ikke et bilag. PDF.js 5.6.205 (Apache-2.0) indlæses lokalt ved brug og tegner én side ad gangen, også på telefoner.
+
+## 1.5.3
+Unactivated mobile browsers first show installation instructions. Activation fields appear inside the installed app; using the browser requires an explicit alternative choice. iPad desktop-style user agents are included. Existing enrolled browsers keep their login. Updates preserve the device credentials and do not enroll another device.
