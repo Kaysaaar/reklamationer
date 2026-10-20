@@ -1,6 +1,8 @@
 'use strict';
 if(ClaimAuth.remote){
-const local=ClaimStore;
+const local=ClaimStore,photoRequests=new Map();let runningPhotos=0;const photoQueue=[];
+function pumpPhotos(){while(runningPhotos<3&&photoQueue.length){const task=photoQueue.shift();runningPhotos++;task().finally(()=>{runningPhotos--;pumpPhotos();});}}
+function queuedPhoto(task){return new Promise((resolve,reject)=>{photoQueue.push(async()=>{try{resolve(await task());}catch(e){reject(e);}});pumpPhotos();});}
 window.ClaimStore={
   async get(key){return ClaimAuth.decrypt(await local.get('encrypted:'+key));},
   async put(key,value){return local.put('encrypted:'+key,await ClaimAuth.encrypt(value));},
@@ -15,6 +17,7 @@ window.ClaimStore={
   async followup(record,workflow){const updated=await ClaimAuth.call('followup',{id:record.id,revision:record.revision,...workflow,officeNotes:record.officeNotes});return {...updated,photos:record.photos};},
   listPage:filters=>ClaimAuth.call('listCases',{...filters,paged:true}),
   list:(query='',status='')=>ClaimAuth.call('listCases',{query,status}),
-  async load(id){const record=await ClaimAuth.call('getCase',{id});let next=0;await Promise.all(Array.from({length:Math.min(3,record.photos.length)},async()=>{while(next<record.photos.length){const i=next++;record.photos[i].data=await ClaimAuth.call('getPhoto',{caseId:id,photoId:record.photos[i].id});}}));return record;}
+  async photo(record,index){const p=record.photos[index];if(!p)throw Error('Billedet blev ikke fundet.');if(p.data)return p.data;const id=record.id+':'+p.id;if(!photoRequests.has(id)){if(photoRequests.size>=20)photoRequests.delete(photoRequests.keys().next().value);photoRequests.set(id,queuedPhoto(()=>ClaimAuth.call('getPhoto',{caseId:record.id,photoId:p.id})).catch(e=>{photoRequests.delete(id);throw e;}));}p.data=await photoRequests.get(id);return p.data;},
+  async load(id){return ClaimAuth.call('getCase',{id});}
 };
 }

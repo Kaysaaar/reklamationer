@@ -79,3 +79,5 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .auth-panel input[type="text"]{font-size:16px;letter-spacing:normal;text-align:left;width:100%;min-width:0;box-sizing:border-box}.auth-panel details{margin-top:20px}.auth-panel summary{cursor:pointer}.auth-panel p{overflow-wrap:anywhere}
 
 .auth-panel form>label{display:block;margin:16px 0 0}.auth-panel form>label input{margin-top:6px}
+
+#cameraContent{height:0;overflow:hidden;padding-bottom:0;transition:height .26s cubic-bezier(.2,.7,.2,1)}.camera-handle{touch-action:none}.case-tools{margin-top:24px}.case-tools form>button{margin-top:16px}.attachment-row{display:flex;align-items:center;gap:12px;margin:10px 0}.attachment-row button{overflow-wrap:anywhere;min-width:0}.case-tools input[type=file]{font-size:14px}.case-tools .field{min-width:0}.case-tools .fields{margin-bottom:20px}@media(prefers-reduced-motion:reduce){#cameraContent{transition:none}}

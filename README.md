@@ -15,3 +15,11 @@ Sager får ved afsluttet overførsel et kort nummer, fx R26-0001. Interne ID'er 
 Begge apps kontrollerer version.json ved åbning og hvert femte minut, mens appen er synlig. En ny version vises som en knap; ingen automatisk genindlæsning. Sælgerkladden gemmes før opdatering. Kontoret skal først gemme ændret opfølgning. Login kan kræves igen efter opdatering.
 
 Ved næste udgivelse: opdatér versionsnummer i update.js, version.json og HTML-filernes JS/CSS-parametre samlet i samme udgivelse. Publicér aldrig serverkode, kundedata eller lokale gennemgangsfiler i dette repository.
+
+
+## 1.3.0
+Saved cases, including closed cases, can be edited with a reason and revision history. Reopening requires a reason. The responsible seller or office can share a case with active colleagues; shared access is enforced for metadata, history, photos and attachments. Office search includes narrative fields and closed cases. Office-only notes remain private.
+
+Attachments on saved cases accept PDF, images, EML/MSG, text, CSV, DOCX and XLSX, up to 4 MiB each and 50 per case. Files remain in the private case folder and download through authenticated requests. Attachment contents are not full-text indexed.
+
+Case metadata renders before photo downloads, with a maximum of three concurrent image requests and a bounded in-memory cache. The camera drawer follows pointer movement and respects reduced-motion preferences.
