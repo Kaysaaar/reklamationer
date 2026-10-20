@@ -26,3 +26,6 @@ Case metadata renders before photo downloads, with a maximum of three concurrent
 
 ## 1.3.1
 Attachment preview loads on demand via the existing authenticated endpoint. EML displays decoded headers and text-only mail content (no remote images or active HTML); multipart, base64 and quoted-printable supported. Images, text/CSV and browser-native PDF preview; MSG, Word and Excel still require download. HEIC/PDF availability depends on the browser. Original files are unchanged.
+
+## 1.4.0
+Shared timeline loads on expansion in pages of20 and combines case creation, registered inspection, revision events, attachments and dated call/visit/agreement/notes. Notes are immutable, idempotent on retry, retain case status and are visible only to current case participants and office. Internal office notes never enter the timeline. Follow-up may be assigned to office or existing case sellers with an optional date; server validates membership and dates, prevents removing a participant with a pending action, and clears reminders when closing. Sheet columns are added on first write. Search cards show customer/city, a bounded matching excerpt and follow-up summary without additional case-file reads. File chooser and drag/drop share validation and upload logic (4MiB,50file limits retained); direct dragging from mail programs depends on their browser integration.
