@@ -105,3 +105,20 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .office-followup>.field{margin:0}.office-followup>button{justify-self:start}.office-followup>p:empty{display:none}
 @media(min-width:650px){.office-followup>.workflow-editor{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1100px){.office-followup>.workflow-editor{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Office overview: shared margins and a single search panel. */
+.office-page{--office-gutter:clamp(16px,3vw,56px)}
+.office-page>header{max-width:1920px;padding-inline:var(--office-gutter);gap:16px}
+.office-page>header>.brand{margin-right:auto}.office-page>header>span{margin-right:12px}
+.office-page .office-main{max-width:1920px;padding:28px var(--office-gutter) 40px}
+.office-title{font-size:clamp(26px,2.4vw,34px);margin:0 0 24px}
+.office-search-panel{padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.office-search-panel .office-toolbar{margin:0 0 20px;display:block}
+.office-search-panel .office-search{display:grid;grid-template-columns:minmax(0,1fr) auto auto;max-width:none;width:100%;gap:12px}
+.office-search-panel .office-search input{width:100%}
+.office-search-panel .office-filters{margin:0;gap:20px}
+.office-search-panel .office-filters label{margin:0;gap:8px}
+.office-page #caseCount{margin:22px 0 12px}
+.office-page .case-columns{padding-inline:20px}.office-page .case-overview .case-row{padding:20px;min-height:100px}
+@media(max-width:700px){.office-search-panel{padding:16px}.office-search-panel .office-filters{gap:14px}.office-title{margin-bottom:18px}.office-page>header{flex-wrap:wrap}.office-page>header>span{display:none}}
+@media(max-width:480px){.office-search-panel .office-search{grid-template-columns:1fr 1fr}.office-search-panel .office-search input{grid-column:1/-1}.office-page .office-main{padding-top:20px}}
