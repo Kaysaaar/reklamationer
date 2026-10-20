@@ -41,3 +41,6 @@ Besøgsreferatets PDF vises inden godkendelse, med sideknapper og mulighed for a
 
 ## 1.5.3
 Unactivated mobile browsers first show installation instructions. Activation fields appear inside the installed app; using the browser requires an explicit alternative choice. iPad desktop-style user agents are included. Existing enrolled browsers keep their login. Updates preserve the device credentials and do not enroll another device.
+
+## 1.5.4
+Aktiveringslinkets fragment kan indeholde et foreslået enhedsnavn fra administratoren. Navnet vises som redigerbar tekst før aktivering; det ændrer ikke rolle eller adgang. Eksisterende links uden navn virker fortsat.
