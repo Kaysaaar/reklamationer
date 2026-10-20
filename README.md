@@ -44,3 +44,6 @@ Unactivated mobile browsers first show installation instructions. Activation fie
 
 ## 1.5.4
 Aktiveringslinkets fragment kan indeholde et foreslået enhedsnavn fra administratoren. Navnet vises som redigerbar tekst før aktivering; det ændrer ikke rolle eller adgang. Eksisterende links uden navn virker fortsat.
+
+## 1.6.0
+Administration kan åbnes inde i kontorappen. Google-reserven opsætter en særskilt adgangskode og udpeger konkrete kontorenheder. Appen kræver både normal kontorsession, godkendt enhed og ekstra administratorlogin. PBKDF2-SHA256 (600.000 iterationer) på klienten; serveren gemmer kun en pepper-beskyttet kontrolværdi. Ekstra administratorsession varer 15 minutter og bevares ikke ved genindlæsning. Fem forkerte forsøg låser administratorlogin indtil nulstilling via Google. Google kan fortsat administrere og genoprette adgang. Ingen adminopsætning eller udvidelse af administratorenheder via den offentlige app.
