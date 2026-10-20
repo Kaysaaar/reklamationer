@@ -35,3 +35,6 @@ Visit tools on saved cases: own-note dictation uses the device keyboard (Danish 
 
 ## 1.5.1
 Besøgsreferater gemmes som PDF med Wallmann-logo, godkendt tekst, sidenumre og op til 10 valgte billeder. Gemte billedmarkeringer kan vælges som bilag. PDF'en gemmes privat på sagen via den eksisterende filoverførsel og kan vises eller downloades. Ingen automatisk afsendelse. Interne kontornoter medtages ikke. PDF-værktøjet (pdf-lib 1.17.1, MIT) hentes først ved brug; PDF-billeder skaleres til højst 1800 pixels og originalerne bevares. Grænsen på 4 MiB pr. bilag gælder også referater.
+
+## 1.5.2
+Besøgsreferatets PDF vises inden godkendelse, med sideknapper og mulighed for at rette tekst/billedvalg. Kun den viste fil gemmes ved godkendelse. Forhåndsvisning gemmer ikke et bilag. PDF.js 5.6.205 (Apache-2.0) indlæses lokalt ved brug og tegner én side ad gangen, også på telefoner.
