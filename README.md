@@ -23,3 +23,6 @@ Saved cases, including closed cases, can be edited with a reason and revision hi
 Attachments on saved cases accept PDF, images, EML/MSG, text, CSV, DOCX and XLSX, up to 4 MiB each and 50 per case. Files remain in the private case folder and download through authenticated requests. Attachment contents are not full-text indexed.
 
 Case metadata renders before photo downloads, with a maximum of three concurrent image requests and a bounded in-memory cache. The camera drawer follows pointer movement and respects reduced-motion preferences.
+
+## 1.3.1
+Attachment preview loads on demand via the existing authenticated endpoint. EML displays decoded headers and text-only mail content (no remote images or active HTML); multipart, base64 and quoted-printable supported. Images, text/CSV and browser-native PDF preview; MSG, Word and Excel still require download. HEIC/PDF availability depends on the browser. Original files are unchanged.
