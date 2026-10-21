@@ -198,3 +198,12 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 @media(max-width:600px){#officeDetail .case-navigation{margin-bottom:18px;padding:6px;gap:2px}#officeDetail .case-navigation button{padding:8px 12px}#officeDetail .summary-card>h3:first-child,#officeDetail .case-tools>details>summary{font-size:18px}#officeDetail .case-jump-target{scroll-margin-top:78px}}
 
 .back-to-top{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:5;min-height:44px;padding:10px 15px;font-size:14px;background:#204d3b;color:white;border:1px solid #fff8;border-radius:24px;box-shadow:0 3px 12px #173e3326}.back-to-top[hidden]{display:none}
+
+/* Separate the type chooser, observations and checklists from preceding fields. */
+.office-create details>.field,.case-edit form>.field{margin-top:24px;margin-bottom:20px}
+.office-create details>.fields,.case-edit form>.fields{row-gap:22px}
+.office-create fieldset,.case-edit fieldset,#typeChecks{margin-top:24px;padding:18px;border:1px solid var(--line);border-radius:12px}
+.office-create fieldset legend,.case-edit fieldset legend,#typeChecks legend{font-weight:700;padding:0 8px}
+#typeFields{margin-top:20px;row-gap:22px}
+
+.bc-return-number{display:table;padding:7px 12px;border:1px solid #b4c7b5;border-radius:8px;background:#e8efdf;color:#173e33;font-size:18px;font-weight:750;letter-spacing:.2px;margin:10px 0}

@@ -20,3 +20,5 @@ window.claimDetails=(title,definitions,values)=>{const section=claimEl('section'
 window.claimCustomerHeading=(key,target)=>{const title={customer:'Forhandler',endCustomer:'Slutkunde / besigtigelsessted',inspectionPlace:'Gennemgang og referencer'}[key];if(title)target.append(claimEl('h3','field-group-title',title));};
 
 window.claimCategorySync=(root,values)=>{root.querySelectorAll("[data-category]").forEach(w=>w.hidden=w.dataset.category!==values.productGroup&&!values[w.dataset.field]);};
+
+window.claimTypeOptions=(select,current,values)=>{select.replaceChildren();for(const key of Object.keys(ClaimsSchema.types)){const option=claimEl('option','',ClaimsSchema.typeFor(key,values).name);option.value=key;select.append(option);}select.value=current;};
