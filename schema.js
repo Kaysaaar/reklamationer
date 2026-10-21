@@ -2,13 +2,14 @@
 window.ClaimsSchema = {
   sellers: ['Alexander','Claus','Daniel','Emil','Jørn','Kalle','Kim','Lasse'],
   customer: [
+    ['customer','Forhandler / firma','text'],
+    ['dealerContact','Forhandlerens kontaktperson','text'],['dealerPhone','Forhandlerens telefon','tel'],['dealerEmail','Forhandlerens e-mail','email'],
+    ['endCustomer','Slutkundens navn','text'],['contact','Slutkundens kontaktperson','text'],
+    ['phone','Slutkundens telefon','tel'],['email','Slutkundens e-mail','email'],
+    ['address','Adresse for besigtigelsen','text'],['postcode','Postnummer','text'],['city','By','text'],
     ['inspectionPlace','Gennemgang','select',['Hos kunden','På lageret']],
-    ['returnOrder','Returordrenummer i BC (hvis oprettet)','text'],
-    ['reference','Kundens reference / eksisterende sagsnummer','text'],
-    ['customer','Kunde / forhandler','text',true],['contact','Kontaktperson','text',true],
-    ['phone','Telefon','tel'],['email','E-mail','email'],['address','Adresse for besigtigelsen','text',true],
-    ['postcode','Postnummer','text'],['city','By','text'],['visitDate','Besigtigelsesdato','date',true],
-    ['order','Ordre- eller fakturanummer','text']
+    ['visitDate','Besigtigelsesdato','date'],['returnOrder','Returordrenummer i BC (hvis oprettet)','text'],
+    ['reference','Kundens reference / eksisterende sagsnummer','text'],['order','Ordre- eller fakturanummer','text']
   ],
   product: [
     ['productGroup','Produktgruppe','select',['Gulv','Bordplade','Loft- / vægpanel','Andet']],
@@ -52,6 +53,6 @@ window.ClaimsSchema = {
       ['observation','Hvad observeres?','textarea'],['extentOther','Omfang og placering','textarea'],
       ['investigation','Hvad er undersøgt?','textarea']],checks:['Oversigtsbillede taget','Nærbillede taget','Yderligere oplysninger nødvendige']}
   },
-  closing:[['description','Kundens beskrivelse','textarea',true],['assessment','Sælgerens observationer','textarea'],['proposal','Forslag til næste skridt','textarea']],
+  closing:[['description','Kundens beskrivelse','textarea'],['assessment','Sælgerens observationer','textarea'],['proposal','Forslag til næste skridt','textarea']],
   statuses:['Åben','Afventer','Afsluttet']
 };

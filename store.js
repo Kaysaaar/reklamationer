@@ -16,3 +16,5 @@ window.claimField=(definition,values,onChange)=>{
   if(option===true)control.required=true;control.value=values[key]??'';control.addEventListener('input',()=>onChange(key,control.value));wrapper.append(caption,control);return wrapper;
 };
 window.claimDetails=(title,definitions,values)=>{const section=claimEl('section','summary-card');section.append(claimEl('h3','',title));const dl=claimEl('dl');for(const [key,label] of definitions){if(values[key]!==undefined&&values[key]!==''){dl.append(claimEl('dt','',label),claimEl('dd','',String(values[key])));}}if(!dl.children.length)section.append(claimEl('p','subtle','Ingen oplysninger'));else section.append(dl);return section;};
+
+window.claimCustomerHeading=(key,target)=>{const title={customer:'Forhandler',endCustomer:'Slutkunde / besigtigelsessted',inspectionPlace:'Gennemgang og referencer'}[key];if(title)target.append(claimEl('h3','field-group-title',title));};
