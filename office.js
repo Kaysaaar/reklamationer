@@ -1,6 +1,7 @@
 'use strict';
 (async()=>{
 const identity=await ClaimAuth.ready;if(identity&&identity.role!=='office'){document.querySelector('main').textContent='Denne adgang er til sælgerappen.';return;}if(identity)document.querySelector('.local-note').hidden=true;
+const topButton=claimEl('button','back-to-top','↑ Til toppen');topButton.type='button';topButton.hidden=true;document.body.append(topButton);const updateTopButton=()=>{topButton.hidden=window.scrollY<400;};window.addEventListener('scroll',updateTopButton,{passive:true});topButton.onclick=()=>{window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});const heading=document.querySelector('#officeDetail:not([hidden]) .office-case-head h2')||document.querySelector('#officeOverview h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}};updateTopButton();
 const S=ClaimsSchema,$=claimById,el=claimEl;let records=[],active=null,selected=new Set(),choosing=false,imageIndex=0;
 for(const name of S.statuses){const o=el('option','',name);o.value=name;$('statusFilter').append(o);}
 let requestId=0,total=0,followupDirty=false,followupSaving=false;
