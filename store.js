@@ -13,8 +13,10 @@ window.claimById=id=>document.getElementById(id);
 window.claimField=(definition,values,onChange)=>{
   const [key,label,type,option]=definition,wrapper=claimEl('div','field'),caption=claimEl('label','',label+(option===true?' *':''));caption.htmlFor=key;const control=document.createElement(type==='textarea'?'textarea':type==='select'?'select':'input');control.id=key;control.name=key;
   if(type==='select'){const blank=claimEl('option','','Vælg…');blank.value='';control.append(blank);for(const value of option){const item=claimEl('option','',value);item.value=value;control.append(item);}}else if(type!=='textarea'){control.type=type;if(type==='number'){control.step='any';control.inputMode='decimal';}}
-  if(option===true)control.required=true;control.value=values[key]??'';control.addEventListener('input',()=>onChange(key,control.value));wrapper.append(caption,control);return wrapper;
+  if(option===true)control.required=true;control.value=values[key]??'';control.addEventListener('input',()=>onChange(key,control.value));wrapper.dataset.field=key;const category=ClaimsSchema.categoryFields?.[key];if(category){wrapper.dataset.category=category;wrapper.hidden=values.productGroup!==category&&!values[key];}if(key==='productGroup')control.addEventListener('input',()=>claimCategorySync(wrapper.closest('form')||wrapper.parentElement,values));wrapper.append(caption,control);return wrapper;
 };
 window.claimDetails=(title,definitions,values)=>{const section=claimEl('section','summary-card');section.append(claimEl('h3','',title));const dl=claimEl('dl');for(const [key,label] of definitions){if(values[key]!==undefined&&values[key]!==''){dl.append(claimEl('dt','',label),claimEl('dd','',String(values[key])));}}if(!dl.children.length)section.append(claimEl('p','subtle','Ingen oplysninger'));else section.append(dl);return section;};
 
 window.claimCustomerHeading=(key,target)=>{const title={customer:'Forhandler',endCustomer:'Slutkunde / besigtigelsessted',inspectionPlace:'Gennemgang og referencer'}[key];if(title)target.append(claimEl('h3','field-group-title',title));};
+
+window.claimCategorySync=(root,values)=>{root.querySelectorAll("[data-category]").forEach(w=>w.hidden=w.dataset.category!==values.productGroup&&!values[w.dataset.field]);};
