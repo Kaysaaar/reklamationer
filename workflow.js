@@ -2,11 +2,11 @@
 window.ClaimWorkflow=(()=>{
  let sequence=0;
  const resolutions=['Kunden accepterer forklaringen','Aftalt løsning uden retur','Retur oprettet i BC','Anden løsning'];
- const normalize=s=>s==='Ny'||s==='Under behandling'?'Åben':s==='Afventer oplysninger'?'Afventer':s;
+ const normalize=s=>['Ny','Under behandling','Afventer','Afventer oplysninger'].includes(s)?'Åben':s;
  function editor(record,onChange=()=>{}){
-  const el=claimEl,box=el('section','summary-card workflow-editor'),state=record.workflow||{status:normalize(record.status)==='Afsluttet'?'Afsluttet':normalize(record.status)==='Afventer'?'Afventer':'Åben',nextAction:record.nextAction||'',actionOwnerId:record.actionOwnerId||record.sellerId||'office',followupDate:record.followupDate||'',resolution:record.resolution||'',resolutionNote:record.resolutionNote||''};record.workflow=state;
+  const el=claimEl,box=el('section','summary-card workflow-editor'),state=record.workflow||{status:normalize(record.status)==='Afsluttet'?'Afsluttet':'Åben',nextAction:record.nextAction||'',actionOwnerId:record.actionOwnerId||record.sellerId||'office',followupDate:record.followupDate||'',resolution:record.resolution||'',resolutionNote:record.resolutionNote||''};state.status=normalize(state.status);record.workflow=state;
   box.append(el('h3','','Hvad skal der ske med sagen?'));
-  const status=claimField(['workflowStatus','Gem sagen som','select',['Åben','Afventer','Afsluttet']],{workflowStatus:state.status},(_,v)=>{state.status=v;sync();onChange();});
+  const status=claimField(['workflowStatus','Gem sagen som','select',['Åben','Afsluttet']],{workflowStatus:state.status},(_,v)=>{state.status=v;sync();onChange();});
   const reopening=normalize(record.status)==='Afsluttet';const reason=claimField(['reopenReason','Hvorfor genåbnes sagen?','textarea'],{},(_,v)=>{state.reason=v;onChange();});
   const next=claimField(['nextAction','Næste handling / hvad afventer vi?','textarea'],state,(k,v)=>{state[k]=v;onChange();});
   const owner=claimField(['actionOwnerId','Ansvarlig for næste handling','select',[]],{},(k,v)=>{state[k]=v;onChange();}),ownerControl=owner.querySelector('select');ownerControl.replaceChildren();for(const person of [{id:'office',name:'Kontoret'},...(record.sellerId?[{id:record.sellerId,name:record.seller}]:[]),...(record.team||[])]){const o=el('option','',person.name);o.value=person.id;ownerControl.append(o);}if(state.actionOwnerId&&!Array.from(ownerControl.options).some(o=>o.value===state.actionOwnerId)){const o=el('option','',record.actionOwnerName||'Tidligere ansvarlig');o.value=state.actionOwnerId;ownerControl.append(o);}ownerControl.value=state.actionOwnerId||record.sellerId||'office';

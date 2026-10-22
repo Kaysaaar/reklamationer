@@ -209,3 +209,8 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .bc-return-number{display:table;padding:7px 12px;border:1px solid #b4c7b5;border-radius:8px;background:#e8efdf;color:#173e33;font-size:18px;font-weight:750;letter-spacing:.2px;margin:10px 0}
 
 .attention-bar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.attention-bar button{min-height:40px;padding:8px 12px;font-size:14px}.attention-bar button[aria-pressed=true]{background:var(--green);color:white}.case-new{display:table;background:#204d3b;color:white;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:700;width:fit-content}.contact-link{color:var(--ink);text-decoration:underline;text-underline-offset:3px}.duplicate-dialog,.conflict-copy{width:min(700px,94vw);max-height:90dvh;padding:24px}.duplicate-dialog>button{margin:8px 8px 0 0}.conflict-copy textarea{min-height:45vh}.case-tools [role=status]>button{display:block;margin-top:12px}
+
+/* Persistent save follows the currently edited section and uses its normal validation. */
+.case-floating-save{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom));z-index:5;min-height:44px;padding:12px 18px;border-radius:24px;box-shadow:0 3px 12px #173e3326;font-size:14px;width:auto}
+.case-floating-save:disabled{opacity:.65;cursor:default}
+#officeDetail,#savedDetailContent{padding-bottom:140px}
