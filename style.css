@@ -245,3 +245,6 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 #viewerImage,.attachment-image{touch-action:pan-y pinch-zoom}
 
 .seller-page .case-list button span.case-new,.case-new{color:#fff!important;-webkit-text-fill-color:#fff;background:var(--green)}
+
+/* Compact mail review and optional first follow-up. */
+.original-mail pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;max-height:24rem;overflow:auto}.import-review{margin-top:1rem}.import-review dl{display:grid;grid-template-columns:minmax(8rem,1fr) minmax(0,2fr);gap:.5rem 1rem;max-height:22rem;overflow:auto}.import-review dt{font-weight:600}.import-review dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.creation-followup{margin:1.5rem 0;padding:1rem;border:1px solid #c9d7c8;border-radius:12px}.creation-followup h3{margin-top:0}@media(max-width:540px){.import-review dl{grid-template-columns:1fr;gap:.25rem}.import-review dd{margin-bottom:.75rem}}
