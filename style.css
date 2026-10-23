@@ -236,3 +236,12 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .live-camera::backdrop,.camera-photo-preview::backdrop{background:#000c}.live-camera-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.live-camera h2{font-size:20px;color:white;margin:0}.live-camera-head button{min-height:44px}.live-camera video{display:block;width:100%;height:48vh;height:48dvh;object-fit:contain;background:#000;margin-top:12px;border-radius:12px}.live-camera p{font-size:14px;line-height:1.4;margin:10px 0}.live-camera .camera-reserve{color:#d3e0d7!important}.camera-shutter{display:block;margin:12px auto 4px;background:white;color:#163f30;border:4px solid #b1c7ba;border-radius:50%;width:88px;height:88px;padding:6px;font-size:14px;font-weight:bold}.live-camera-thumbs{display:flex;gap:8px;overflow-x:auto}.live-camera-thumbs button{flex:0 0 56px;padding:0;height:48px;border-radius:6px;overflow:hidden}.live-camera-thumbs img{width:100%;height:100%;object-fit:cover}.camera-photo-preview{max-width:95vw;max-height:94dvh;border:0;border-radius:12px;padding:12px}.camera-photo-preview>button{display:block;margin:0 0 10px auto}.camera-photo-preview img{display:block;max-width:100%;max-height:78dvh;object-fit:contain}
 @media(prefers-reduced-motion:reduce){.saved-camera-content{transition:none}}
 @media print{.saved-camera-drawer,.live-camera{display:none}}
+
+/* Camera controls and the uncropped native frame */
+.live-camera-head button{color:#173e33;background:#fff}
+.live-camera video{width:auto;height:auto;max-width:100%;max-height:48dvh;margin:12px auto 0;object-fit:contain}
+.pending-camera-photos{padding:12px;border:1px solid var(--line);border-radius:12px;margin-block:12px;background:var(--soft)}
+.pending-camera-photos img{width:100%;height:130px;object-fit:contain;border-radius:8px}
+#viewerImage,.attachment-image{touch-action:pan-y pinch-zoom}
+
+.seller-page .case-list button span.case-new,.case-new{color:#fff!important;-webkit-text-fill-color:#fff;background:var(--green)}

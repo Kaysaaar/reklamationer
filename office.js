@@ -38,3 +38,5 @@ async function view(index){imageIndex=index;const current=active;try{const src=a
 $('previousImage').onclick=()=>view(Math.max(0,imageIndex-1));$('nextImage').onclick=()=>view(Math.min(ClaimCaseTools.images(active).length-1,imageIndex+1));$('closeViewer').onclick=()=>$('viewer').close();$('viewer').onkeydown=e=>{if(e.key==='ArrowLeft'){$('previousImage').click();e.preventDefault();}if(e.key==='ArrowRight'){$('nextImage').click();e.preventDefault();}};refresh();
 const linked=new URL(location.href).searchParams.get('case');if(linked){const close=ClaimCaseList.opening();try{active=await ClaimStore.load(linked);renderCase();$('officeOverview').hidden=true;$('officeDetail').hidden=false;window.scrollTo(0,0);}catch(e){$('officeStatus').textContent=e.message;}finally{close();}}
 })();
+
+claimSwipe(document.getElementById('viewerImage'),()=>document.getElementById('previousImage').click(),()=>document.getElementById('nextImage').click());
