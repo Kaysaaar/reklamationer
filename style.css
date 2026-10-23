@@ -221,3 +221,18 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .attachment-manage-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end;padding:12px 0;border-bottom:1px solid #d9e1d9}.attachment-manage-row.removed{opacity:.65}.attachment-manage-row input{margin-top:8px}.attachment-manage-row button{width:auto}@media(max-width:600px){.attachment-manage-row{grid-template-columns:1fr}.attachment-manage-row button{justify-self:start}}
 
 #officeDetail .case-jump-target{scroll-margin-top:var(--case-nav-offset,160px)}#officeDetail .case-navigation button:hover:not([aria-current]){background:#e2eadd;color:var(--green)}
+
+/* Camera: compact bottom handle, expandable preview strip and continuous capture. */
+.camera-reserve{display:block!important;margin:6px auto!important;min-height:36px!important;padding:6px 10px!important;width:auto!important;font-size:12px!important;background:transparent!important;color:var(--muted)!important;border:0!important;text-decoration:underline}
+.saved-camera-drawer{position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -4px 20px #173e3314;padding:0 max(16px,calc((100vw - 720px)/2)) env(safe-area-inset-bottom,0px)}
+.saved-camera-drawer .camera-handle{width:100%;min-height:52px;margin:0;padding:10px 0;display:flex;justify-content:space-between;align-items:center}
+.saved-camera-content{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}
+.saved-camera-drawer.expanded .saved-camera-content{grid-template-rows:1fr}
+.saved-camera-inner{overflow:hidden;min-height:0;max-height:65vh;max-height:65dvh}
+.saved-camera-drawer.expanded .saved-camera-inner{overflow:auto;overscroll-behavior:contain}
+.saved-camera-inner>.primary{width:100%;margin-top:8px}.saved-camera-inner>p{font-size:13px;margin:8px 0 12px}.saved-camera-inner .photo-strip{margin:8px 0}.saved-camera-inner .photo-card{min-width:0}
+.seller-page #savedDetail{padding-bottom:70px}.seller-page #savedDetail .case-floating-save{bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:19}
+.live-camera{padding:16px;background:#12281f;color:white;border:0;border-radius:16px;width:min(680px,calc(100vw - 20px));max-height:94vh;max-height:94dvh;overflow:auto;overscroll-behavior:contain}
+.live-camera::backdrop,.camera-photo-preview::backdrop{background:#000c}.live-camera-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.live-camera h2{font-size:20px;color:white;margin:0}.live-camera-head button{min-height:44px}.live-camera video{display:block;width:100%;height:48vh;height:48dvh;object-fit:contain;background:#000;margin-top:12px;border-radius:12px}.live-camera p{font-size:14px;line-height:1.4;margin:10px 0}.live-camera .camera-reserve{color:#d3e0d7!important}.camera-shutter{display:block;margin:12px auto 4px;background:white;color:#163f30;border:4px solid #b1c7ba;border-radius:50%;width:88px;height:88px;padding:6px;font-size:14px;font-weight:bold}.live-camera-thumbs{display:flex;gap:8px;overflow-x:auto}.live-camera-thumbs button{flex:0 0 56px;padding:0;height:48px;border-radius:6px;overflow:hidden}.live-camera-thumbs img{width:100%;height:100%;object-fit:cover}.camera-photo-preview{max-width:95vw;max-height:94dvh;border:0;border-radius:12px;padding:12px}.camera-photo-preview>button{display:block;margin:0 0 10px auto}.camera-photo-preview img{display:block;max-width:100%;max-height:78dvh;object-fit:contain}
+@media(prefers-reduced-motion:reduce){.saved-camera-content{transition:none}}
+@media print{.saved-camera-drawer,.live-camera{display:none}}

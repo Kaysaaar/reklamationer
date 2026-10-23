@@ -1,7 +1,9 @@
 'use strict';
 window.ClaimCaseTools=(()=>{
  const el=claimEl,S=ClaimsSchema,uploads=new Map(),saveObservers=new WeakMap(),managers=new WeakMap();
- const photo=(r,i)=>ClaimStore.photo?ClaimStore.photo(r,i):Promise.resolve(r.photos[i].data);
+ const attachmentImages=new WeakMap(),attachmentRequests=new WeakMap();
+ const images=r=>[...(r.photos||[]),...(r.attachments||[]).filter(a=>/\.(jpe?g|png|webp)$/i.test(a.name)).map(a=>({id:'attachment:'+a.id,attachment:a,data:attachmentImages.get(a)}))];
+ const photo=(r,i)=>{const p=images(r)[i];if(!p)return Promise.reject(Error('Billedet blev ikke fundet.'));if(!p.attachment)return ClaimStore.photo?ClaimStore.photo(r,i):Promise.resolve(p.data);const a=p.attachment;if(attachmentImages.has(a))return Promise.resolve(attachmentImages.get(a));if(!attachmentRequests.has(a))attachmentRequests.set(a,(ClaimStore.imageAttachment?ClaimStore.imageAttachment(r,a):ClaimAuth.call('getAttachment',{id:r.id,attachmentId:a.id})).then(f=>{const ext=a.name.split('.').pop().toLowerCase(),data='data:'+({png:'image/png',webp:'image/webp'}[ext]||'image/jpeg')+';base64,'+f.base64;attachmentImages.set(a,data);return data;}).catch(e=>{attachmentRequests.delete(a);throw e;}));return attachmentRequests.get(a);};
  // Fetch thumbnails only when they approach the viewport. Repeated bindings for
  // the same image share one loader (office cards bind both image and download).
  const photoBindings=new WeakMap(),observedPhotos=new Set();
@@ -16,7 +18,7 @@ window.ClaimCaseTools=(()=>{
    const load=()=>{if(src){apply();return Promise.resolve(true);}if(pending)return pending;
     img.alt='Henter billede '+(i+1)+'…';pending=photo(r,i).then(value=>{src=value;apply();return true;}).catch(()=>{img.alt='Billedet kunne ikke hentes. Tryk for at prøve igen.';return false;}).finally(()=>{pending=null;});return pending;};
    state={links,load,loaded:()=>!!src};photoBindings.set(img,state);img.alt='Billede '+(i+1);img.decoding='async';
-   requestAnimationFrame(()=>{for(const old of observedPhotos)if(!old.isConnected){photoObserver.unobserve(old);observedPhotos.delete(old);}if(!img.isConnected)return;if(r.photos[i]?.data||!photoObserver)load();else{observedPhotos.add(img);photoObserver.observe(img);}});
+   requestAnimationFrame(()=>{for(const old of observedPhotos)if(!old.isConnected){photoObserver.unobserve(old);observedPhotos.delete(old);}if(!img.isConnected)return;if(images(r)[i]?.data||!photoObserver)load();else{observedPhotos.add(img);photoObserver.observe(img);}});
   }
   if(link){state.links.add(link);link.removeAttribute('href');link.setAttribute('aria-disabled','true');link.onclick=async e=>{if(state.loaded())return;e.preventDefault();if(await state.load())link.click();};if(state.loaded())state.load();}
  }
@@ -60,5 +62,5 @@ window.ClaimCaseTools=(()=>{
  }
  function leaveDialog(){return new Promise(resolve=>{const d=el('dialog','leave-dialog');d.append(el('h2','','Du har ændringer, der ikke er gemt.'));const done=value=>{d.close();d.remove();resolve(value);};for(const [value,label]of [['save','Gem og gå tilbage'],['stay','Fortsæt redigering'],['discard','Forlad uden at gemme']]){const b=el('button',value==='save'?'primary':'',label);b.type='button';b.onclick=()=>done(value);d.append(b);}d.oncancel=e=>{e.preventDefault();done('stay');};document.body.append(d);d.showModal();});}
  function toast(message){const n=el('p','case-toast',message);n.setAttribute('role','status');document.body.append(n);setTimeout(()=>n.remove(),5000);}
- return {toast,leave:container=>managers.get(container)?.leave()??Promise.resolve(true),mount,photo,bindPhoto,followup(container,form,getData,valid,onBusy){const m=managers.get(container);m.register(form,'followup',getData,valid);m.setBusyHook(onBusy);container.append(m.bottomSave);}};
+ return {images,toast,leave:container=>managers.get(container)?.leave()??Promise.resolve(true),mount,photo,bindPhoto,followup(container,form,getData,valid,onBusy){const m=managers.get(container);m.register(form,'followup',getData,valid);m.setBusyHook(onBusy);container.append(m.bottomSave);}};
 })();
