@@ -2,7 +2,25 @@
 window.ClaimCaseTools=(()=>{
  const el=claimEl,S=ClaimsSchema,uploads=new Map(),saveObservers=new WeakMap(),managers=new WeakMap();
  const photo=(r,i)=>ClaimStore.photo?ClaimStore.photo(r,i):Promise.resolve(r.photos[i].data);
- function bindPhoto(r,i,img,link){const load=()=>{img.alt='Henter billede '+(i+1)+'…';photo(r,i).then(src=>{img.src=src;img.alt='Billede '+(i+1);if(link){link.href=src;link.removeAttribute('aria-disabled');}}).catch(()=>{img.alt='Billedet kunne ikke hentes. Tryk for at prøve igen.';});};if(link){link.removeAttribute('href');link.setAttribute('aria-disabled','true');}load();}
+ // Fetch thumbnails only when they approach the viewport. Repeated bindings for
+ // the same image share one loader (office cards bind both image and download).
+ const photoBindings=new WeakMap(),observedPhotos=new Set();
+ const photoObserver=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{
+  for(const entry of entries){if(entry.isIntersecting){photoObserver.unobserve(entry.target);observedPhotos.delete(entry.target);if(entry.target.isConnected)photoBindings.get(entry.target)?.load();}}
+ },{rootMargin:'200px 0px'}):null;
+ function bindPhoto(r,i,img,link){
+  let state=photoBindings.get(img);
+  if(!state){
+   const links=new Set();let pending=null,src='';
+   const apply=()=>{img.src=src;img.alt='Billede '+(i+1);for(const a of links){a.href=src;a.removeAttribute('aria-disabled');}};
+   const load=()=>{if(src){apply();return Promise.resolve(true);}if(pending)return pending;
+    img.alt='Henter billede '+(i+1)+'…';pending=photo(r,i).then(value=>{src=value;apply();return true;}).catch(()=>{img.alt='Billedet kunne ikke hentes. Tryk for at prøve igen.';return false;}).finally(()=>{pending=null;});return pending;};
+   state={links,load,loaded:()=>!!src};photoBindings.set(img,state);img.alt='Billede '+(i+1);img.decoding='async';
+   requestAnimationFrame(()=>{for(const old of observedPhotos)if(!old.isConnected){photoObserver.unobserve(old);observedPhotos.delete(old);}if(!img.isConnected)return;if(r.photos[i]?.data||!photoObserver)load();else{observedPhotos.add(img);photoObserver.observe(img);}});
+  }
+  if(link){state.links.add(link);link.removeAttribute('href');link.setAttribute('aria-disabled','true');link.onclick=async e=>{if(state.loaded())return;e.preventDefault();if(await state.load())link.click();};if(state.loaded())state.load();}
+ }
+
  function mount(r,container,updated,dirty=()=>{}){
  if(!ClaimAuth.remote)return;
  const copy=el('button','text-button','Kopiér sagslink');copy.type='button';copy.onclick=async()=>{try{const url=new URL(location.href);url.hash='';url.search='';url.searchParams.set('case',r.caseNumber||r.id);await navigator.clipboard.writeText(url.href);toast('Sagslink kopieret. Modtageren skal have adgang til sagen.');}catch(_){toast('Linket kunne ikke kopieres. Sagsnummer: '+(r.caseNumber||r.id));}};container.append(copy);
