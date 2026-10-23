@@ -14,7 +14,7 @@ window.ClaimCaseTools=(()=>{
   let state=photoBindings.get(img);
   if(!state){
    const links=new Set();let pending=null,src='';
-   const apply=()=>{img.src=src;img.alt='Billede '+(i+1);for(const a of links){a.href=src;a.removeAttribute('aria-disabled');}};
+   const apply=()=>{if(!img.isConnected)return;img.src=src;img.alt='Billede '+(i+1);for(const a of links){a.href=src;a.removeAttribute('aria-disabled');}};
    const load=()=>{if(src){apply();return Promise.resolve(true);}if(pending)return pending;
     img.alt='Henter billede '+(i+1)+'…';pending=photo(r,i).then(value=>{src=value;apply();return true;}).catch(()=>{img.alt='Billedet kunne ikke hentes. Tryk for at prøve igen.';return false;}).finally(()=>{pending=null;});return pending;};
    state={links,load,loaded:()=>!!src};photoBindings.set(img,state);img.alt='Billede '+(i+1);img.decoding='async';
