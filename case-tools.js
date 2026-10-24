@@ -13,12 +13,16 @@ window.ClaimCaseTools=(()=>{
  function bindPhoto(r,i,img,link){
   let state=photoBindings.get(img);
   if(!state){
-   const links=new Set();let pending=null,src='';
+   const links=new Set();let pending=null,src='',failed=false;
+   const placeholder=el('span','photo-loading'),wheel=el('span','photo-loading-wheel'),caption=el('span','','Henter billede…');wheel.setAttribute('aria-hidden','true');placeholder.setAttribute('role','status');placeholder.append(wheel,caption);img.classList.add('photo-awaiting');
+   const showError=()=>{failed=true;img.classList.add('photo-awaiting');placeholder.hidden=false;placeholder.classList.add('photo-load-failed');caption.textContent='Kunne ikke hente billedet';const hint=el('span','photo-retry','Tryk for at prøve igen');if(!placeholder.querySelector('.photo-retry'))placeholder.append(hint);};
+   img.addEventListener('load',()=>{failed=false;img.classList.remove('photo-awaiting');placeholder.hidden=true;});
+   img.addEventListener('error',showError);
    const apply=()=>{if(!img.isConnected)return;img.src=src;img.alt='Billede '+(i+1);for(const a of links){a.href=src;a.removeAttribute('aria-disabled');}};
    const load=()=>{if(src){apply();return Promise.resolve(true);}if(pending)return pending;
-    img.alt='Henter billede '+(i+1)+'…';pending=photo(r,i).then(value=>{src=value;apply();return true;}).catch(()=>{img.alt='Billedet kunne ikke hentes. Tryk for at prøve igen.';return false;}).finally(()=>{pending=null;});return pending;};
+    failed=false;placeholder.classList.remove('photo-load-failed');placeholder.querySelector('.photo-retry')?.remove();caption.textContent='Henter billede…';pending=photo(r,i).then(value=>{src=value;apply();return true;}).catch(()=>{if(img.isConnected)showError();return false;}).finally(()=>{pending=null;});return pending;};
    state={links,load,loaded:()=>!!src};photoBindings.set(img,state);img.alt='Billede '+(i+1);img.decoding='async';
-   requestAnimationFrame(()=>{for(const old of observedPhotos)if(!old.isConnected){photoObserver.unobserve(old);observedPhotos.delete(old);}if(!img.isConnected)return;if(images(r)[i]?.data||!photoObserver)load();else{observedPhotos.add(img);photoObserver.observe(img);}});
+   requestAnimationFrame(()=>{for(const old of observedPhotos)if(!old.isConnected){photoObserver.unobserve(old);observedPhotos.delete(old);}if(!img.isConnected)return;img.parentElement.classList.add('photo-loading-host');img.after(placeholder);img.parentElement.addEventListener('click',e=>{if(failed){e.preventDefault();e.stopImmediatePropagation();load();}},{capture:true});if(images(r)[i]?.data||!photoObserver)load();else{observedPhotos.add(img);photoObserver.observe(img);}});
   }
   if(link){state.links.add(link);link.removeAttribute('href');link.setAttribute('aria-disabled','true');link.onclick=async e=>{if(state.loaded())return;e.preventDefault();if(await state.load())link.click();};if(state.loaded())state.load();}
  }
