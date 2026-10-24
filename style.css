@@ -261,3 +261,19 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 .office-gallery a[aria-disabled="true"]{color:#7c887f;text-decoration:none;font-size:12px}
 @keyframes photo-turn{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.photo-loading-wheel{animation:none}}
+
+/* Calm, consistent surfaces and hierarchy across the two apps. */
+:root{--paper:#f5f6f3;--line:#dce3dc;--soft:#edf2e8}
+body{font-weight:400}button{border-radius:9px}input,select,textarea{border-color:#c9d3ca;border-radius:9px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #78946a;outline-offset:3px}
+body>header{background:#fff;border-bottom-color:var(--line)}
+.auth-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px;margin:10vh auto;box-shadow:0 8px 30px #173e3306}.auth-panel h1{font-size:28px;letter-spacing:-.6px}.auth-panel details{background:#fafbf9;border-radius:10px}.auth-panel summary{font-size:14px}.auth-panel>p{color:var(--muted)}
+.office-detail{border-radius:14px}.office-case-head h2{font-size:28px;letter-spacing:-.6px}.office-case-head{padding-bottom:24px}.office-case-head .subtle{font-size:13px}
+#officeDetail .summary-card>h3:first-child{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:0 0 12px;font-size:17px;margin-bottom:16px}
+#officeDetail .case-tools>details>summary{background:#f4f6f2;font-size:17px;border-radius:11px;padding:16px 20px}
+#officeDetail .case-tools>.case-timeline>summary{background:#e9f0e8;color:var(--ink)}
+#officeDetail .case-tools>details[open]>summary{border-radius:11px 11px 0 0}
+#officeDetail .field-group-title,#officeDetail .field-group-title:first-child{background:transparent;border-left:0;border-bottom:1px solid var(--line);border-radius:0;padding:12px 0;font-size:17px}
+#officeDetail .case-navigation{background:#fff;box-shadow:0 3px 12px #173e3308}.case-sticky-identity{color:var(--muted);font-size:12px;letter-spacing:.1px}
+.attention-bar{gap:6px}.attention-bar button{border-radius:8px;font-weight:600}
+.seller-page .attention-bar{flex-wrap:nowrap;overflow-x:auto;padding:3px 1px 5px;gap:6px}.seller-page .attention-bar button{flex:1 0 auto;white-space:nowrap;font-size:13px;padding:8px;min-height:44px}
+@media(max-width:560px){.auth-panel{margin:6vh 16px;padding:24px}.seller-page .attention-bar button{font-size:12px}.office-case-head h2{font-size:24px}}
