@@ -248,3 +248,5 @@ dialog{max-width:calc(100vw - 24px);max-height:94vh;max-height:94dvh;overflow:au
 
 /* Compact mail review and optional first follow-up. */
 .original-mail pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;max-height:24rem;overflow:auto}.import-review{margin-top:1rem}.import-review dl{display:grid;grid-template-columns:minmax(8rem,1fr) minmax(0,2fr);gap:.5rem 1rem;max-height:22rem;overflow:auto}.import-review dt{font-weight:600}.import-review dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.creation-followup{margin:1.5rem 0;padding:1rem;border:1px solid #c9d7c8;border-radius:12px}.creation-followup h3{margin-top:0}@media(max-width:540px){.import-review dl{grid-template-columns:1fr;gap:.25rem}.import-review dd{margin-bottom:.75rem}}
+
+.case-loading{max-width:1100px;margin:auto}.case-load-status{font-weight:700;padding:16px;border-left:4px solid #78935b;background:#edf2e7}.case-load-placeholder{padding:20px;margin-top:16px;border-radius:14px;background:#eef0ec;color:#50645a;border:1px solid #d7dfd3}.case-load-placeholder h2{font-size:1.1rem;margin:0 0 12px}.case-load-placeholder p{margin:0}

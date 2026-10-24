@@ -6,7 +6,21 @@ window.ClaimCaseList=(()=>{
  function progress(r){const box=el('span','case-progress');box.append(el('span','pill',r.status));if(r.status!=='Afsluttet'&&r.nextAction)box.append(el('span','case-next',r.nextAction));const text=ClaimWorkflow.compact(r);if(text)box.append(el('span',ClaimWorkflow.overdue(r)?'overdue':'subtle',text));return box;}
  function decorate(button,r){button.classList.add('case-card',r.status==='Afsluttet'?'case-closed':'case-open');}
  function opening(message='Åbner sag…'){const dialog=el('dialog','case-opening'),status=el('p','',message);status.setAttribute('role','status');dialog.setAttribute('aria-label',message);dialog.append(el('span','opening-spinner'),status);dialog.addEventListener('cancel',e=>e.preventDefault());document.body.append(dialog);dialog.showModal();return ()=>{dialog.close();dialog.remove();};}
- return {describe,progress,decorate,opening};
+ // A list summary is read-only until the current case and its revision arrive.
+ function preview(area,item,back,retry){
+  const shell=el('section','case-loading'),exit=el('button','text-button','‹ Til oversigten');exit.type='button';exit.onclick=back;
+  const v=item.values||{},heading=el('h1','',v.customer||v.endCustomer||'Henter sag…'),status=el('p','case-load-status','Henter aktuelle sagsoplysninger…');status.setAttribute('role','status');
+  if(back)shell.append(exit);shell.append(heading,el('p','subtle',[item.caseNumber||item.id,item.seller,item.status].filter(Boolean).join(' · ')));
+  if(v.returnOrder)shell.append(el('p','bc-return-number','BC-returordre · '+v.returnOrder));
+  const address=[v.address,v.postcode,v.city].filter(Boolean).join(', ');if(address)shell.append(el('p','',address));
+  if(v.description)shell.append(el('p','',v.description));
+  shell.append(status,el('p','subtle','Oplysninger fra oversigten. Redigering åbner, når den aktuelle sag er hentet.'));
+  for(const name of ['Kunde og sagsoplysninger','Billeder og bilag']){const part=el('div','case-load-placeholder');part.append(el('h2','',name),el('p','',name==='Kunde og sagsoplysninger'?'Henter oplysninger…':'Hentes separat, når du åbner sektionen.'));shell.append(part);}
+  area.replaceChildren(shell);
+  const timer=setTimeout(()=>{if(shell.isConnected)status.textContent='Det tager længere tid end normalt. Du kan gå tilbage til oversigten imens.';},8000);
+  return {current:()=>shell.isConnected,done:()=>clearTimeout(timer),fail:error=>{clearTimeout(timer);if(!shell.isConnected)return;status.textContent=error.message||'Sagen kunne ikke hentes.';for(const part of shell.querySelectorAll('.case-load-placeholder p'))part.textContent='Ikke hentet. Prøv igen eller gå tilbage.';const button=el('button','primary','Prøv igen');button.type='button';button.onclick=retry;shell.append(button);}};
+ }
+ return {describe,progress,decorate,opening,preview};
 })();
 window.ClaimTimeline=(()=>{
  const el=claimEl;
