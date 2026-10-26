@@ -283,3 +283,5 @@ body>header{background:#fff;border-bottom-color:var(--line)}
 .create-case-button span{position:relative;font-size:0!important;flex:0 0 32px;line-height:1}
 .create-case-button span::before,.create-case-button span::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;border-radius:1px;background:currentColor;transform:translate(-50%,-50%)}
 .create-case-button span::after{transform:translate(-50%,-50%) rotate(90deg)}
+
+.case-next-shortcuts{border-top:1px solid var(--line,#dce3dc);margin-top:16px;padding-top:12px}.case-next-shortcuts button{min-height:44px}.case-next-shortcuts .contact-actions{margin-top:12px}
