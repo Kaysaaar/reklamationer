@@ -7,7 +7,7 @@ window.ClaimsSchema = {
     ['endCustomer','Slutkundens navn','text'],['contact','Slutkundens kontaktperson','text'],
     ['phone','Slutkundens telefon','tel'],['email','Slutkundens e-mail','email'],
     ['address','Adresse for besigtigelsen','text'],['postcode','Postnummer','text'],['city','By','text'],
-    ['inspectionPlace','Gennemgang','select',['Hos kunden','På lageret']],
+    ['inspectionPlace','Gennemgang','select',['Hos kunden','På lageret','Uden besøg']],
     ['visitDate','Besigtigelsesdato','date'],['returnOrder','Returordrenummer i BC (hvis oprettet)','text'],
     ['reference','Kundens reference / eksisterende sagsnummer','text'],['order','Ordre- eller fakturanummer','text']
   ],
