@@ -285,3 +285,8 @@ body>header{background:#fff;border-bottom-color:var(--line)}
 .create-case-button span::after{transform:translate(-50%,-50%) rotate(90deg)}
 
 .case-next-shortcuts{border-top:1px solid var(--line,#dce3dc);margin-top:16px;padding-top:12px}.case-next-shortcuts button{min-height:44px}.case-next-shortcuts .contact-actions{margin-top:12px}
+
+/* Optional office insights are loaded only when requested. */
+.case-insights{width:min(850px,calc(100vw - 32px));max-height:90dvh;overflow:auto;padding:24px;border:1px solid #cbd7cc;border-radius:16px;color:#183f33;background:#f6f7f3}
+.case-insights>button{float:right}.case-insights h2{clear:both;padding-top:16px}.case-insights table{width:100%;border-collapse:collapse}.case-insights th,.case-insights td{text-align:left;padding:10px 8px;border-bottom:1px solid #dce3db;overflow-wrap:anywhere}.case-insights th:last-child,.case-insights td:last-child{text-align:right;white-space:nowrap}
+.office-overview-heading{flex-wrap:wrap;gap:12px}.office-overview-heading>.text-button{margin-left:auto}
