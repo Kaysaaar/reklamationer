@@ -1,6 +1,10 @@
  'use strict';
 (async()=>{const user=await ClaimAuth.ready;if(!user)return;
-const button=document.createElement('button');button.type='button';button.className='settings-button';button.textContent='Min adgang';
+const name=String(user.sellerName||'').trim(),deviceLabel=String(user.label||'').trim();
+const normalizedName=name.toLocaleLowerCase('da'),normalizedLabel=deviceLabel.toLocaleLowerCase('da');
+const labelIncludesName=name&&(normalizedLabel===normalizedName||[' · ',' – ',' - ',' '].some(separator=>normalizedLabel.startsWith(normalizedName+separator)));
+const caption=(labelIncludesName?deviceLabel:[name,deviceLabel].filter(Boolean).join(' · '))||'Denne enhed';
+const button=document.createElement('button');button.type='button';button.className='settings-button';button.textContent=caption;button.title='Vis min adgang';button.setAttribute('aria-label',caption+' – vis min adgang');button.setAttribute('aria-haspopup','dialog');
 const dialog=document.createElement('dialog');dialog.className='settings-dialog';dialog.setAttribute('aria-label','Min adgang');
 const title=document.createElement('h2');title.textContent='Min adgang';const person=document.createElement('p');person.textContent=user.sellerName||'';
 const label=document.createElement('p');label.textContent=user.label||'Denne enhed';const info=document.createElement('p');info.textContent='Appen åbner med din private enhedsadgang. Kontoret kan tilbagekalde adgangen, hvis du mister enheden.';
